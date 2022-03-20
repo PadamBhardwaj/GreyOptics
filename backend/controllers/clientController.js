@@ -1,5 +1,7 @@
 const { addListener } = require("../Models/clientModel");
 const Client=require("../Models/clientModel")
+const Customer=require("../Models/customerModel")
+const Order=require("../Models/orderModel")
 const ErrorHandler=require("../utils/errorHandler")
 const catchAsyncError=require("../middleware/catchAsyncError");
 const sendToken = require("../utils/jwtToken");
@@ -28,23 +30,43 @@ exports.getAllClients=catchAsyncError( async (req,res)=>{
         clients
     })
 });
-// exports.updateClient=catchAsyncError( async (req,res,next)=>{
 
-//     let client= await Client.findById(req.params.id);
-//     if(!client){
-//         return next(new ErrorHandler("Client not found",404));
-//     }
-//     client=await Client.findByIdAndUpdate(req.params.id,req.body,{
-//         new:true,
-//         runValidators:true,
-//         useFindAndModify:false
-//     })
-//     res.status(200).json({
-//         success:true,
-//         client
-//     })
-// });
+// get all the customers of a client
+exports.getCustomersOfClient=catchAsyncError(async(req,res,next)=>{
+    const client_id=req.params.id;
+    console.log(client_id);
+    const customers=await Customer.find({client_id});
+    if(!customers){
+        return next(new ErrorHandler("No customers found",400));
+    }
+    console.log(customers);
+    res.status(200).json({
+        success:true,
+        customers
+    })
+})
+ 
+// get all the orders of a customer of a client
 
+exports.getOredersOfCustomerOfClient=catchAsyncError(async(req,res,next)=>{
+    const client_id=req.params.id;
+    // console.log(client_id);
+    const customers=await Customer.find({client_id});
+    if(!customers){
+        return next(new ErrorHandler("No customers found",400));
+    }
+    const customer=await customers[0];
+    const orderarr=await customer.orders;
+
+    // console.log(orderarr[0]);
+    
+    const order=await Order.find({_id:orderarr[0]});
+    res.status(200).json({
+        success:true,
+        customer,
+        order
+    })
+})
 exports.loginClient=catchAsyncError(async(req,res,next)=>{
         const {email,password}=req.body;
 
@@ -69,14 +91,44 @@ exports.loginClient=catchAsyncError(async(req,res,next)=>{
         sendToken(client,200,res);
     }
 )
-// exports.deleteClient=catchAsyncError( async(req,res,next)=>{
-//     const client=await Client.findById(req.params.id);
-//     if(!client){
-//         return next(new ErrorHandler("Client not found",404));
+
+//logut client
+exports.logout=catchAsyncError(async(req,res,next)=>{
+    res.cookie("token",null,{
+        expires:new Date(Date.now()),
+        httpOnly:true
+    })
+    res.status(200).json({
+
+        success:true,
+        message:"Logged out successfully"
+    })
+})
+
+
+
+// exports.loginAdmin=catchAsyncError(async(req,res,next)=>{
+//     const {email,password}=req.body;
+    
+
+//     if(!email||!password){
+//         return next(new ErrorHandler("Please enter email and password",400));
+
 //     }
-//     await client.remove()
-//     res.status(200).json({
-//         success:true,
-//         message:"client deleted"
-//     })
-// });
+//     const client=await Client.findOne({email}).select("+password");
+
+//     if(!client){
+//         return next(new ErrorHandler("Invalid username ",401));
+//     }
+//     if(client.role!=="admin"){
+//         return next(new ErrorHandler(""))
+//     }
+//     const isPasswordMatched=await client.comparePassword(password);
+    
+//     if(!isPasswordMatched){
+//         return next(new ErrorHandler("Invalid  password",401));
+//     }
+//     sendToken(client,200,res);
+// }
+// )
+

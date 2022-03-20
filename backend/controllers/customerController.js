@@ -2,12 +2,18 @@ const { addListener } = require("../Models/customerModel");
 const Customer=require("../Models/customerModel")
 const ErrorHandler=require("../utils/errorHandler")
 const catchAsyncError=require("../middleware/catchAsyncError");
+const { compile } = require("ejs");
 
 
 exports.createCustomer=catchAsyncError( async (req,res,next)=>{
+    req.body.client_id=req.client.id;
     const customer=await Customer.create(req.body);
-    console.log("Controller")
-    sendToken(customer,201,res);
+    console.log("Controller");
+    res.status(200).json({
+        success:true,
+        customer
+    })
+
 
 });
 exports.getAllCustomers=catchAsyncError( async (req,res)=>{
@@ -18,26 +24,6 @@ exports.getAllCustomers=catchAsyncError( async (req,res)=>{
     })
 });
 
-// exports.loginCustomer=catchAsyncError(
-//     async(req,res,next)=>{
-//         const {email,password}=req.body;
-//         if(!email||!password){
-//             return next(new ErrorHandler("Please enter email and password",400));
-
-//         }
-//         const customer=await Customer.findOne({email}).select("+password");
-//         if(!user){
-//             return next(new ErrorHandler("Invalid username or password",401));
-
-//         }
-//         const isPasswordMatched=customer.comparePassword(password);
-//         if(!isPasswordMatched){
-//             return next(new ErrorHandler("Invalid username or password",401));
-
-//         }
-//         sendToken(customer,200,res);
-//     }
-// )
 
 exports.updateCustomer=catchAsyncError( async (req,res,next)=>{
     let customer= await Customer.findById(req.params.id);
