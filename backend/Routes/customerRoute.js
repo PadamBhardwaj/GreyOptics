@@ -3,7 +3,7 @@ const express=require("express");
 const {getAllCustomers,createCustomer,updateCustomer,deleteCustomer, loginCustomer, getCustomersOfClient}=require("../controllers/customerController");
 const { isAuthenticatedClient, authRole } = require("../middleware/auth");
 const router=express.Router();
-console.log("Route start point");
+
 router.route("/customers").get(isAuthenticatedClient,getAllCustomers);
 router.route("/customers/new").post(isAuthenticatedClient,authRole("admin"), createCustomer);
 router.route("/customers/:id").put(isAuthenticatedClient,authRole("admin"),updateCustomer).delete(isAuthenticatedClient,authRole("admin"),deleteCustomer);

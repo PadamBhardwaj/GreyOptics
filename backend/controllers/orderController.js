@@ -3,9 +3,9 @@ const Order=require("../Models/orderModel")
 const ErrorHandler=require("../utils/errorHandler")
 const catchAsyncError=require("../middleware/catchAsyncError")
 exports.createOrder=catchAsyncError( async (req,res,next)=>{
-    console.log("order create called")
+
     const order=await Order.create(req.body);
-    console.log("Controller Order")
+
     res.status(201).json({
         success:true,
         order

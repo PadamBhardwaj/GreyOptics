@@ -21,7 +21,8 @@ const clientSchema=new mongoose.Schema({
     },
     username:{
         type:String,
-        // unique:true
+        unique:true,
+        required:true
     },
     password:{
         type:String,
@@ -49,7 +50,7 @@ clientSchema.methods.getJWTToken=function(){
 clientSchema.methods.comparePassword=async function(enteredPassword){
     // console.log(bcrypt.compare(enteredPassword,this.password));
     const bool=await bcrypt.compare(enteredPassword,this.password);
-    console.log(bool);
+    // console.log(bool);
     return bool;
 }
 

@@ -8,7 +8,7 @@ const { compile } = require("ejs");
 exports.createCustomer=catchAsyncError( async (req,res,next)=>{
     req.body.client_id=req.client.id;
     const customer=await Customer.create(req.body);
-    console.log("Controller");
+
     res.status(200).json({
         success:true,
         customer

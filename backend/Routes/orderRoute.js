@@ -3,7 +3,6 @@ const express=require("express");
 const {getAllOrders,createOrder,updateOrder,deleteOrder}=require("../controllers/orderController");
 const router=express.Router();
 
-console.log("Route start point Order");
 router.route("/orders").get(getAllOrders);
 router.route("/orders/new").post(createOrder);
 router.route("/orders/:id").put(updateOrder).delete(deleteOrder);

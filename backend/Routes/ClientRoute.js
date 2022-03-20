@@ -2,7 +2,7 @@ const { Router } = require("express");
 const express=require("express");
 const {getAllClients, loginClient, registerClient, getCustomersOfClient, getOredersOfCustomerOfClient, logout}=require("../controllers/clientController");
 const router=express.Router();
-console.log("Route start point Client");
+
 router.route("/clients").get(getAllClients);
 // router.route("/clients/new").post(createClient);
 // router.route("/clients/:id").put(updateClient).delete(deleteClient);

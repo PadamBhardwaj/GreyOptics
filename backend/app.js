@@ -17,14 +17,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect(process.env.DBPATH+"/customerDB",{useNewUrlParser:true});
 //Routes
-console.log("app start");
 const customer=require("./Routes/customerRoute")
 const order=require("./Routes/orderRoute")
 const client=require("./Routes/clientRoute")
 app.use("/api",customer);   
 app.use("/api",order);   
 app.use("/api",client);   
-console.log("app end")
+
 // Handling Uncaught Exception
 process.on("uncaughtException", (err) => {
     console.log(`Error: ${err.message}`);
@@ -43,45 +42,3 @@ process.on("unhandledRejection", (err) => {
       process.exit(1);
     });
   });
-
-
-
-
-
-
-
-
-
-
-
-
-// app.get("/", function (req, res) {  
-//     res.sendFile(__dirname + "/views/home.html");
-// })
-
-// app.get("/adminlogin", function (req, res) {
-//     res.sendFile(__dirname + "/views/adminlogin.html");
-
-// })
-// app.post("/adminlogin",function(req,res){
-//     const val={
-//         username:req.body.adminname,
-//         password:req.body.adminpass
-//     }
-//     console.log(val);
-//     res.send("success");
-// })
-// app.get("/userlogin", function (req, res) {
-//     res.sendFile(__dirname + "/views/userlogin.html");
-// })
-// app.post("/userlogin",function(req,res){
-//     const val={
-//         username:req.body.username,
-//         password:req.body.userpass
-//     }
-//     console.log(val);
-//     res.send("success");
-// })
-
-
-

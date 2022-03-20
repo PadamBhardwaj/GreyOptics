@@ -5,7 +5,6 @@ const Order=require("../Models/orderModel")
 const ErrorHandler=require("../utils/errorHandler")
 const catchAsyncError=require("../middleware/catchAsyncError");
 const sendToken = require("../utils/jwtToken");
-// const bcrypt = require("bcryptjs/dist/bcrypt");
 const bcrypt = require("bcryptjs");
 exports.registerClient=catchAsyncError( async (req,res,next)=>{
     const {name,email,password}=req.body;
@@ -23,7 +22,7 @@ exports.registerClient=catchAsyncError( async (req,res,next)=>{
     })
 });
 exports.getAllClients=catchAsyncError( async (req,res)=>{
-    console.log("getting all cients")
+    // console.log("getting all cients")
     const clients = await Client.find();
     res.status(200).json({
         success:true,
@@ -104,31 +103,4 @@ exports.logout=catchAsyncError(async(req,res,next)=>{
         message:"Logged out successfully"
     })
 })
-
-
-
-// exports.loginAdmin=catchAsyncError(async(req,res,next)=>{
-//     const {email,password}=req.body;
-    
-
-//     if(!email||!password){
-//         return next(new ErrorHandler("Please enter email and password",400));
-
-//     }
-//     const client=await Client.findOne({email}).select("+password");
-
-//     if(!client){
-//         return next(new ErrorHandler("Invalid username ",401));
-//     }
-//     if(client.role!=="admin"){
-//         return next(new ErrorHandler(""))
-//     }
-//     const isPasswordMatched=await client.comparePassword(password);
-    
-//     if(!isPasswordMatched){
-//         return next(new ErrorHandler("Invalid  password",401));
-//     }
-//     sendToken(client,200,res);
-// }
-// )
 
