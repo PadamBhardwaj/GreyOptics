@@ -7,19 +7,17 @@ const catchAsyncError=require("../middleware/catchAsyncError");
 const sendToken = require("../utils/jwtToken");
 const bcrypt = require("bcryptjs");
 exports.registerClient=catchAsyncError( async (req,res,next)=>{
-    const {name,email,password}=req.body;
+    const {name,email,password,username}=req.body;
     const client=await Client.create({
         name,
         email,
-        password
+        password,
+        username
     })
+    console.log(req.body);
     console.log("Controller")
-    const token=client.getJWTToken();
-    res.status(201).json({
-        success:true,
-        client,
-        token
-    })
+    sendToken(client,200,res);
+    
 });
 exports.getAllClients=catchAsyncError( async (req,res)=>{
     // console.log("getting all cients")
