@@ -1,0 +1,4 @@
+export const CLIENT_REQUEST = "CLIENT_REQUEST"
+export const CLIENT_SUCCESS = "CLIENT_SUCCESS"
+export const CLIENT_FAIL = "CLIENT_FAIL"
+export const CLEAR_ERRORS = "CLEAR_ERRORS"

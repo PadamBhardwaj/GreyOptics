@@ -7,15 +7,17 @@ const mongoose = require("mongoose");
 const ejs = require("ejs");
 const app = express();
 const errorMiddleware=require("./middleware/error")
+const cors = require('cors');
+
+app.use(cors())
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static("public"));
 app.use(errorMiddleware);
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
-
-
 mongoose.connect(process.env.DBPATH+"/customerDB",{useNewUrlParser:true});
+
 //Routes
 const customer=require("./Routes/customerRoute")
 const order=require("./Routes/orderRoute")
@@ -31,7 +33,7 @@ process.on("uncaughtException", (err) => {
     process.exit(1);
   });
 const server=app.listen(4000, function (Req, res) {
-    console.log("server started at port 3000.")
+    console.log("server started at port 4000.")
 })
 // Unhandled Promise Rejection
 process.on("unhandledRejection", (err) => {

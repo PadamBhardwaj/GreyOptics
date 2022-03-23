@@ -6,7 +6,9 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+.headingCustomer{
+  margin: 20px 0 20px 440px;
+}
 .heading h1 {
   margin-bottom: 0%;
   margin-top: 20px;
@@ -23,8 +25,66 @@
   padding: 0;
   margin-top: 40px;
   width: 100px;
-  background-color: rgb(103,137,131);
-  
+  background-color: rgb(103, 137, 131);
+
+}
+
+.search {
+
+  padding-bottom: 20px;
+}
+.search ::placeholder{
+  color: rgb(248, 237, 223);
+}
+
+.search input {
+  background-color: rgb(103, 137, 131);
+
+  color: #fff;
+  margin: 0 30%;
+  padding-left: 4%;
+  border: none;
+  height: 43px;
+  width: 30%;
+  border-radius: 10px;
+}
+
+/* .search{
+  position: relative;
+  right: 9%;
+  font-weight: 3000;
+  color: rgb(23, 54, 44);
+} */
+.customerCard {
+  height: 10%;
+  display: block;
+  /* flex-direction: row; */
+  text-decoration: none;
+  margin: 2vmax;
+  background-color: rgb(240, 233, 210);
+  color: rgb(51, 54, 69);
+  /* text-align: center; */
+  border-radius: 20px;
+  /* border: none; */
+}
+
+.customerCard h3 {
+  margin: 20px;
+  display: inline-block;
+}
+
+.customerCard h4 {
+  display: block;
+  text-align: right;
+  /* margin: 20px; */
+}
+
+.customerCard button {
+  margin: 20px auto 20px 8%;
+}
+
+.customerCard p {
+  margin: 0 20px;
 }
 
 .userform {

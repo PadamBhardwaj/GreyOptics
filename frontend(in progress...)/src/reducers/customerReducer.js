@@ -7,21 +7,21 @@ export const customerReducer = (state = { customers: [] }, action) => {
                 customer: []
             };
         case ALL_CUSTOMER_SUCCESS:
-            return{
-                loading:false,
-                customer:action.payload.customers,
-                customersCount:action.payload.customerCount
-            } ;   
-        case ALL_CUSTOMER_FAIL:
-            return{
-                loading:false,
-                error:action.payload
+            return {
+                loading: false,
+                customers: action.payload.customers,
+                customersCount: action.payload.customerCount
             };
-            case CLEAR_ERRORS:
-                return{
-                    ...state,
-                    error:null
-                }
+        case ALL_CUSTOMER_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            };
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
         default:
             return state;
     }
