@@ -1,12 +1,12 @@
 import React, { useState } from "react"
-import { useNavigate } from 'react-router-dom'
+import { Navigate, Redirect, useNavigate } from 'react-router-dom'
 import Heading from "./Heading"
-import Userform from "./Userform";
+// import Userform from "./Userform";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
 import { clearErrors, login } from "../../actions/clientAction"
 import "../../App.css";
-function Home() {
+function Home({ history }) {
     // const navigate = useNavigate()
     let initialValue = {
         email: '',
@@ -39,7 +39,13 @@ function Home() {
 
     const handleClick = () => {
         console.log(val);
-        dispatch(login(val.email, val.password))
+        if (!val.email || !val.password) {
+            return <Redirect to={'/'} />
+            // console.log("no")
+        }
+        dispatch(login(val.email, val.password));
+        history.push("/customer");
+        // return <Redirect to="/customer" />
     }
     return <>
         <div className="App">
@@ -55,12 +61,12 @@ function Home() {
                     <br />
                     <input type="password" placeholder="password" name="password" value={val.password} onChange={handleChange} />
                 </div>
-                <Link to='/customer'>
-                    <div >
-                        <button onClick={handleClick} className="submitbtn btn btn-success" type="submit">Submit</button>
-                    </div>
-                </Link>
-               
+                {/* <Link to='/customer'> */}
+                <div >
+                    <button onClick={handleClick} className="submitbtn btn btn-success" type="submit">Submit</button>
+                </div>
+                {/* </Link> */}
+
             </div>
         </div>
     </>

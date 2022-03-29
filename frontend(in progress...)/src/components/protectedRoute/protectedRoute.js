@@ -1,24 +1,28 @@
 // import { is } from 'express/lib/request';
-import React from 'react'
+import React, { Fragment } from 'react'
 import { useSelector } from 'react-redux'
-import { Route, Navigate } from 'react-router-dom';
+import { Route, Routes, Redirect } from 'react-router-dom';
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
     const { loading, isAuthenticated, client } = useSelector((state) => state.client);
+    // console.log("protected route running")
     return (
-        <>
-            {loading && (
-                <Route
+        <Fragment>
+            {loading === false && (
+
+                < Route
                     {...rest}
                     render={(props) => {
                         if (!isAuthenticated) {
-                            return <Navigate to="/" />
+                            { console.log("not authenticated") }
+                            return <Redirect to="/" />
                         }
                         return <Component {...props} />;
                     }}
                 />
+
             )}
-        </>
+        </Fragment>
     )
 }
 

@@ -15,16 +15,19 @@ exports.registerClient = catchAsyncError(async (req, res, next) => {
         username
     })
     console.log(req.body);
-    console.log("Controller")
+    // console.log("Controller")
     sendToken(client, 200, res);
 
 });
-exports.getAllClients = catchAsyncError(async (req, res) => {
-    // console.log("getting all cients")
-    const clients = await Client.find();
+exports.getClient = catchAsyncError(async (req, res) => {
+
+    const client = await Client.findById(req.client.id);
+    if (!client) {
+        res.status(400);
+    }
     res.status(200).json({
         success: true,
-        clients
+        client
     })
 });
 
