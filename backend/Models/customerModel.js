@@ -7,7 +7,7 @@ const customerSchema = new mongoose.Schema({
     client_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Client',
-        required:true
+        required: true
     },
     name: {
         type: String
@@ -22,8 +22,10 @@ const customerSchema = new mongoose.Schema({
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
     orders: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Order'
+        Order: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Order'
+        }
     }],
 
 

@@ -18,7 +18,7 @@ const cutomerCreate = ({ history }) => {
     name: "",
     address: "",
     date: "",
-    contactno: 0,
+    contactno: "",
     email: "",
 
   }
@@ -34,14 +34,13 @@ const cutomerCreate = ({ history }) => {
     history.push("/customer");
   }
   return (
-    <div><form >
+    <div className='divform'><form className='formdiv'>
       <input placeholder='Name' name="name" className='inp' value={val.name} onChange={handleChange} />
       <input placeholder='Address' name="address" className='inp' value={val.address} onChange={handleChange} />
       <input placeholder='Date' name="date" className='inp' value={val.date} onChange={handleChange} />
       <input placeholder='Contact no.' name="contactno" className='inp' value={val.contactno} onChange={handleChange} />
       <input placeholder='Email' name="email" className='inp' value={val.email} onChange={handleChange} />
       <button onClick={handleClick} className="submitbtn btn btn-success" type="submit">Submit</button>
-
     </form></div>
   )
 }

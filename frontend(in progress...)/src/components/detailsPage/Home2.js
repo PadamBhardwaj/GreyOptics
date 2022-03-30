@@ -14,11 +14,12 @@ const Home2 = ({ history }) => {
     );
     // console.log(client, isAuthenticated);
     useEffect(() => {
-        dispatch(getCustomer())
+        dispatch(getCustomer());
         if (isAuthenticated === false) {
             console.log("home 2 returning")
             history.push("/");
         }
+        console.log(client.role);
     }, [history, isAuthenticated]);
     function handleClick() {
         dispatch(logout());
@@ -35,7 +36,7 @@ const Home2 = ({ history }) => {
             </div>
             <div>
                 <Search />
-                {customers && customers.map((customer) => <Customer id={customer._id} key={customer._id} customer={customer} />)}
+                {customers && customers.map((customer) => <Customer id={customer._id} key={customer._id} customer={customer} history={history} />)}
             </div>
             <LogoutButton func={handleClick} />
 
