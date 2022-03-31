@@ -1,10 +1,10 @@
 import React from "react";
 import '../../App.css';
-function Heading(){
+function Heading() {
     return <div className="heading container"><h1 className="fs-1 fw-bold">
-        GREY    
+        GREY
     </h1>
-    <h2 className="fs-3">Software</h2>
+        <h2 className="fs-3">Software</h2>
     </div>
 }
 

@@ -8,8 +8,10 @@ import ProtectedRoute from "./components/protectedRoute/protectedRoute"
 import Home2 from './components/detailsPage/Home2';
 import store from "./store";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import ClientCreate from './components/Forms/clientCreate';
 import { loadUser } from './actions/clientAction';
 import { useEffect } from 'react';
+import redirect from './components/AdminUserRedirect/redirect';
 function App() {
   useEffect(() => {
     store.dispatch(loadUser());
@@ -19,16 +21,13 @@ function App() {
     <>
       <Router>
         <Switch>
-          {/* <Routes> */}
           <Route exact path='/' component={Home} />
-          {/* <Route exact path='/customer' element={<Home2 />} /> */}
-          {/* <Route exact path='/customer/*' element={<ProtectedRoute component={<Home2 />} />} /> */}
-          {/* <Route extract path='/adminhome' element={<HomeAdmin />} /> */}
-          {/* <Route extract path='/home' element={<Home2 />} /> */}
           <ProtectedRoute exact path="/customer" component={Home2} />
+          <ProtectedRoute exact path="/redirect" component={redirect} />
           <ProtectedRoute exact path="/customer/new" component={cutomerCreate} />
+          <ProtectedRoute exact path="/clients/register" component={ClientCreate} />
+          <ProtectedRoute exact path="/admin" component={HomeAdmin} />
           <ProtectedRoute exact path="/customer/orders/new/:id" component={OrderCreate} />
-          {/* </Routes> */}
         </Switch>
       </Router>
     </>

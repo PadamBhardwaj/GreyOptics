@@ -5,22 +5,31 @@ import Customer from "./Customer";
 import Search from "./Search";
 import LogoutButton from "../logoutButton/logoutButton";
 import { logout } from "../../actions/clientAction"
-import { Link, Redirect, Route } from "react-router-dom";
+
 const Home2 = ({ history }) => {
     const dispatch = useDispatch();
     const { client, loading, isAuthenticated } = useSelector((state) => state.client);
     const { error, customers } = useSelector(
         (state) => state.customers
     );
-    // console.log(client, isAuthenticated);
+    
     useEffect(() => {
         dispatch(getCustomer());
         if (isAuthenticated === false) {
             console.log("home 2 returning")
             history.push("/");
         }
-        console.log(client.role);
+
+        if (client.role === "admin") {
+            console.log("Admin login")
+            history.push("/admin");
+        }
+        
     }, [history, isAuthenticated]);
+    if (!client) {
+        window.location.reload();
+
+    }
     function handleClick() {
         dispatch(logout());
         history.push("/");

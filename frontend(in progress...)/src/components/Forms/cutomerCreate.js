@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-// import Input from './input';
+
 import "./input.css"
 import { createCustomer } from "../../actions/customerAction"
 const cutomerCreate = ({ history }) => {
   const dispatch = useDispatch();
   const { client, loading, isAuthenticated } = useSelector((state) => state.client);
-  // const { } = useDispatch((state) => state.customer);
+
   useEffect(() => {
     if (isAuthenticated === false) {
       console.log("createCustomer returning")

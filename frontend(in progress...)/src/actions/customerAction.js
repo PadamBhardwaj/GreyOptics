@@ -21,7 +21,7 @@ export const getCustomer = () => async (dispatch) => {
             type: ALL_CUSTOMER_REQUEST
         });
         const { data } = await axios.get("/api/customers")
-        console.log(data);
+        
         dispatch({
             type: ALL_CUSTOMER_SUCCESS,
             payload: data
@@ -54,7 +54,7 @@ export const createCustomer = (customer) => async (dispatch) => {
     }
 };
 
-//update customer
+
 
 export const updateProfile = (userData) => async (dispatch) => {
     try {
@@ -74,7 +74,7 @@ export const updateProfile = (userData) => async (dispatch) => {
 };
 
 export const createOrder = (order, id) => async (dispatch) => {
-    // try {
+    
     dispatch({ type: ADD_ORDER_REQUEST });
 
     const config = {
@@ -82,19 +82,19 @@ export const createOrder = (order, id) => async (dispatch) => {
             "Content-Type": "application/json",
         },
     };
-    // console.log(order, customer)
+    
     const { data } = await axios.post(`/api/customer/orders/new/${id}`, order, config);
     console.log(data, "create");
 
     dispatch({ type: ADD_ORDER_SUCCESS, payload: data });
-    // }
-    // } catch (error) {
-    //     console.log("error")
-    //     dispatch({
-    //         type: ADD_ORDER_FAIL,
-    //         payload: error.response,
-    //     });
-    // }
+    
+    
+    
+    
+    
+    
+    
+    
 }
 export const clearErrors = () => {
     dispatch({

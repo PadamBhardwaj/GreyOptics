@@ -63,7 +63,7 @@ exports.addOrder = catchAsyncError(async (req, res, next) => {
     // console.log(customer)
     // const newOrder = req.body;
     // console.log(req.body);
-    await Customer.findOneAndUpdate({ _id: customer._id }, { $push: { orders: order._id } })
+    await Customer.findOneAndUpdate({ _id: customer._id }, { $push: { orders:{ Order:order._id } }})
     // console.log(customer);
     res.status(200).json({
         success: true,

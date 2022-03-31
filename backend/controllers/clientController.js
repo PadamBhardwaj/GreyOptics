@@ -91,7 +91,13 @@ exports.loginClient = catchAsyncError(async (req, res, next) => {
     sendToken(client, 200, res);
 }
 )
-
+exports.getAllClients = catchAsyncError(async (req, res) => {
+    const clients = await Client.find();
+    res.status(200).json({
+        success: true,
+        clients
+    })
+});
 //logut client
 exports.logout = catchAsyncError(async (req, res, next) => {
     res.cookie("token", null, {

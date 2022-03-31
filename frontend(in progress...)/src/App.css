@@ -127,6 +127,20 @@
   color: white;
 }
 
+.fontawesome {
+  margin-left: 80%;
+}
+
+i {
+
+  padding: 20px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .Add {
   background-color: rgb(103, 137, 131);
   min-height: 50px;

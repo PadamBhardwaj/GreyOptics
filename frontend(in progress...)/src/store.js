@@ -2,10 +2,11 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { customerReducer } from "./reducers/customerReducer";
-import { clientReducer } from "./reducers/clientReducer";
+import { clientReducer, clientsReducer } from "./reducers/clientReducer";
 const reducer = combineReducers({
     customers: customerReducer,
-    client: clientReducer
+    client: clientReducer,
+    clients: clientsReducer
 })
 
 let initialState = {};

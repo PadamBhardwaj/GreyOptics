@@ -3,8 +3,9 @@ import { Navigate, Redirect, useNavigate } from 'react-router-dom'
 import Heading from "./Heading"
 // import Userform from "./Userform";
 import { Link } from "react-router-dom";
+import store from "../../store";
 import { useDispatch, useSelector } from "react-redux"
-import { clearErrors, login } from "../../actions/clientAction"
+import { clearErrors, loadUser, login } from "../../actions/clientAction"
 import "../../App.css";
 function Home({ history }) {
     // const navigate = useNavigate()
@@ -36,6 +37,8 @@ function Home({ history }) {
     // }
 
     const dispatch = useDispatch();
+    
+    const { client, isAuthenticated } = useSelector(state => state.client);
 
     const handleClick = () => {
         console.log(val);
@@ -43,10 +46,16 @@ function Home({ history }) {
             return <Redirect to={'/'} />
             // console.log("no")
         }
+
         dispatch(login(val.email, val.password));
-        history.push("/customer");
+
+        history.push("/redirect")
+
+        // window.location.reload();
+
         // return <Redirect to="/customer" />
     }
+    
     return <>
         <div className="App">
             <Heading />

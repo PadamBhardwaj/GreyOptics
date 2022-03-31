@@ -1,4 +1,37 @@
-import { CLIENT_REQUEST, CLIENT_FAIL, CLIENT_SUCCESS, CLEAR_ERRORS, LOAD_USER_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS } from "../constants/clientConstants";
+import {
+    CLIENT_REQUEST,
+    CLIENT_FAIL,
+    CLIENT_SUCCESS,
+    CLEAR_ERRORS,
+    LOAD_USER_FAIL,
+    LOAD_USER_REQUEST,
+    LOAD_USER_SUCCESS,
+    ALL_CLIENT_FAIL,
+    ALL_CLIENT_REQUEST,
+    ALL_CLIENT_SUCCESS
+} from "../constants/clientConstants";
+export const clientsReducer = (state = { clients: {} }, action) => {
+    switch (action.type) {
+        case ALL_CLIENT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                clients: action.payload
+            }
+        case ALL_CLIENT_REQUEST:
+            return {
+                loading: true
+            }
+        case ALL_CLIENT_FAIL:
+            return {
+                loading: false,
+                clients: null,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}
 export const clientReducer = (state = { client: {} }, action) => {
     switch (action.type) {
         case CLIENT_REQUEST:
@@ -7,6 +40,7 @@ export const clientReducer = (state = { client: {} }, action) => {
                 loading: true,
                 isAuthenticated: false
             }
+
         case CLIENT_SUCCESS:
         case LOAD_USER_SUCCESS:
             return {
